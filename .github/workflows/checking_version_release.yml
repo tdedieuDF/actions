@@ -21,7 +21,9 @@ jobs:
       - name: Checking version release
         id: version_script_id
         continue-on-error: true
-        run: ${{ github.action_path }}/.github/00-Scripts/checking_version_release.sh
+        run: |
+          echo "my custom path ${{ github.action_path }}"
+          .github/00-Scripts/checking_version_release.sh
 
       - name: Output status
         if: ${{ steps.version_script_id.outcome == 'failure' }}
