@@ -7,15 +7,15 @@ on:
 jobs:
   checking_changelog_format:
     name: checking_changelog_format
-    uses: ./.github/workflows/checking_changelog_format.yml
+    uses: checking_changelog_format.yml
 
   checking_version_release:
     name: checking_version_release
-    uses: ./.github/workflows/checking_version_release.yml
+    uses: checking_version_release.yml
 
   checking_sequencer_config:
     name: checking_sequencer_config
-    uses: ./.github/workflows/checking_sequencer_config.yml
+    uses: checking_sequencer_config.yml
 
   request_changes:
     needs:
@@ -25,7 +25,7 @@ jobs:
         checking_sequencer_config,
       ]
     name: Request changes
-    uses: ./.github/workflows/request_changes.yml
+    uses: request_changes.yml
     with:
       pr_number: ${{ github.event.pull_request.number }}
       conclusion: ${{ needs.checking_changelog_format.outputs.status == null &&

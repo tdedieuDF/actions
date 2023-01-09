@@ -1,14 +1,14 @@
-name: checking_version_release
+name: checking_sequencer_config
 
 on:
   workflow_call:
     outputs:
       status:
         description: "Status"
-        value: ${{ jobs.checking_version_release.outputs.output1 }}
+        value: ${{ jobs.checking_sequencer_config.outputs.output1 }}
 
 jobs:
-  checking_version_release:
+  checking_sequencer_config:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.status_id.outputs.status }}
@@ -18,13 +18,13 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Checking version release
-        id: version_script_id
+      - name: Checking sequencer config
+        id: sequencer_script_id
         continue-on-error: true
-        run: .github/00-Scripts/checking_version_release.sh
+        run: 00-Scripts/checking_sequencer_config.sh
 
       - name: Output status
-        if: ${{ steps.version_script_id.outcome == 'failure' }}
+        if: ${{ steps.sequencer_script_id.outcome == 'failure' }}
         id: status_id
         run: |
           echo 'status<<EOF' >> $GITHUB_OUTPUT
