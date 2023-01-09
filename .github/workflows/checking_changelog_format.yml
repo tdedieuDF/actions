@@ -21,7 +21,7 @@ jobs:
       - name: Checking changelog format
         id: changelog_script_id
         continue-on-error: true
-        run: 00-Scripts/checking_changelog_format.sh
+        run: .github/00-Scripts/checking_changelog_format.sh
 
       - name: Output status
         if: ${{ steps.changelog_script_id.outcome == 'failure' }}

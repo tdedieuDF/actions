@@ -1,15 +1,20 @@
 #!/bin/bash
 
-if [[ "${LIST_DEB_RPM_PACKAGES_PATH}" == "" ]]; then
-    echo "Error: package path not found"
-    exit 1
-fi
-
 DIRECTORY=$(dirname "$0")
 SCRIPT_NAME=$(basename "$(test -L "$0" && readlink "$0" || echo "$0")" | sed -e "s/.sh//g")
 ERR_FILE_NAME=err_"${SCRIPT_NAME}".log
 rm -rf "${ERR_FILE_NAME}"
 mkdir -p result
+
+LIST_DEB_RPM_PACKAGES_PATH+=($(find . \
+    -path "*dds-proxy" -prune \
+    -o -path "*fte_cub_hmi_custom" -prune \
+    -o -path "*test" -prune \
+    -o -path "*tests" -prune \
+    -o -path "*Skeletons" -prune \
+    -o -path "*TMP_MANAGER" -prune \
+    -o -name changelog -print \
+    -o -name *.spec -print))
 
 list_app=()
 for deb_rpm_package_path in ${LIST_DEB_RPM_PACKAGES_PATH[@]}; do
