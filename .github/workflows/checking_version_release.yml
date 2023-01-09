@@ -1,0 +1,32 @@
+name: checking_version_release
+
+on:
+  workflow_call:
+    outputs:
+      status:
+        description: "Status"
+        value: ${{ jobs.checking_version_release.outputs.output1 }}
+
+jobs:
+  checking_version_release:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.status_id.outputs.status }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Checking version release
+        id: version_script_id
+        continue-on-error: true
+        run: .github/00-Scripts/checking_version_release.sh
+
+      - name: Output status
+        if: ${{ steps.version_script_id.outcome == 'failure' }}
+        id: status_id
+        run: |
+          echo 'status<<EOF' >> $GITHUB_OUTPUT
+          echo "$(cat err_${{ github.job }}.log)" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
