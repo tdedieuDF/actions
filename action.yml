@@ -15,13 +15,13 @@ runs:
   steps:
     - name: ${{ inputs.script }}
       shell: bash
-      id: ${{ inputs.script }}
+      id: script_id
       continue-on-error: true
       run: ${{ github.action_path }}/.github/00-Scripts/${{ inputs.script }}.sh
 
     - name: Output status
       shell: bash
-      if: ${{ steps.${{ inputs.script }}.outcome == 'failure' }}
+      if: ${{ steps.script_id.outcome == 'failure' }}
       id: status_id
       run: |
         echo 'status<<EOF' >> $GITHUB_OUTPUT
