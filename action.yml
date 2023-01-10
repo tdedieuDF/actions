@@ -6,12 +6,12 @@ runs:
   steps:
     - run: checking_changelog_format
       id: checking_changelog_format
-      uses: ./.github/workflows/checking_changelog_format.yml
+      uses: .github/00-Scripts/checking_changelog_format.sh
 
     - run: checking_version_release
       id: checking_version_release
-      uses: ./.github/workflows/checking_version_release.yml
+      uses: .github/00-Scripts/checking_version_release.sh
 
     - run: checking_sequencer_config
       id: checking_sequencer_config
-      uses: ./.github/workflows/checking_sequencer_config.yml
+      uses: .github/00-Scripts/checking_sequencer_config.sh
