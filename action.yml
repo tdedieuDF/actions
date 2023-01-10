@@ -9,7 +9,7 @@ runs:
         id: checking_changelog_format
         continue-on-error: true
         # run: ${{ github.action_path }}/.github/00-Scripts/checking_changelog_format.sh
-        run: ${{ github.action_path }}/.github/workflows/checking_changelog_format.yml
+        run: .github/workflows/checking_changelog_format.yml
 
       - name: checking_version_release
         shell: bash
