@@ -1,0 +1,17 @@
+name: 'Check all packages version'
+description: 'Check all packages version'
+
+runs:
+  using: "composite"
+  steps:
+    - run: checking_changelog_format
+      id: checking_changelog_format
+      uses: ./.github/workflows/checking_changelog_format.yml
+
+    - run: checking_version_release
+      id: checking_version_release
+      uses: ./.github/workflows/checking_version_release.yml
+
+    - run: checking_sequencer_config
+      id: checking_sequencer_config
+      uses: ./.github/workflows/checking_sequencer_config.yml
