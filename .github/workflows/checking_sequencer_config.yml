@@ -21,7 +21,7 @@ jobs:
       - name: Checking sequencer config
         id: sequencer_script_id
         continue-on-error: true
-        run: ${{ github.action_path }}/.github/00-Scripts/checking_sequencer_config.sh
+        run: ./.github/00-Scripts/checking_sequencer_config.sh
 
       - name: Output status
         if: ${{ steps.sequencer_script_id.outcome == 'failure' }}
