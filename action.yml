@@ -7,14 +7,14 @@ runs:
     - name: checking_changelog_format
       shell: bash
       id: checking_changelog_format
-      uses: .github/00-Scripts/checking_changelog_format.sh
+      run: .github/00-Scripts/checking_changelog_format.sh
 
     - name: checking_version_release
       shell: bash
       id: checking_version_release
-      uses: .github/00-Scripts/checking_version_release.sh
+      run: .github/00-Scripts/checking_version_release.sh
 
     - name: checking_sequencer_config
       shell: bash
       id: checking_sequencer_config
-      uses: .github/00-Scripts/checking_sequencer_config.sh
+      run: .github/00-Scripts/checking_sequencer_config.sh
