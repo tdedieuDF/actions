@@ -1,0 +1,29 @@
+name: Check all packages version
+description: Check all packages version
+
+inputs:
+  script:
+    description: "Script name to launch"
+    required: true
+outputs:
+  status:
+    description: "Return status"
+    value: ${{ steps.status_id.outputs.status }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: ${{ inputs.script }}
+      shell: bash
+      id: script_id
+      continue-on-error: true
+      run: ${{ github.action_path }}/.github/00-Scripts/${{ inputs.script }}.sh
+
+    - name: Output status
+      shell: bash
+      if: ${{ steps.script_id.outcome == 'failure' }}
+      id: status_id
+      run: |
+        echo 'status<<EOF' >> $GITHUB_OUTPUT
+        echo "$(cat err_${{ inputs.script }}.log)" >> $GITHUB_OUTPUT
+        echo 'EOF' >> $GITHUB_OUTPUT
