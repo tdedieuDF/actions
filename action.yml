@@ -1,17 +1,20 @@
-name: 'Check all packages version'
-description: 'Check all packages version'
+name: "Check all packages version"
+description: "Check all packages version"
 
 runs:
   using: "composite"
   steps:
-    - run: checking_changelog_format
+    - name: checking_changelog_format
+      shell: bash
       id: checking_changelog_format
       uses: .github/00-Scripts/checking_changelog_format.sh
 
-    - run: checking_version_release
+    - name: checking_version_release
+      shell: bash
       id: checking_version_release
       uses: .github/00-Scripts/checking_version_release.sh
 
-    - run: checking_sequencer_config
+    - name: checking_sequencer_config
+      shell: bash
       id: checking_sequencer_config
       uses: .github/00-Scripts/checking_sequencer_config.sh
