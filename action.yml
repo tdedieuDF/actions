@@ -7,14 +7,23 @@ runs:
     - name: checking_changelog_format
       shell: bash
       id: checking_changelog_format
-      run:  ${{ github.action_path }}/.github/00-Scripts/checking_changelog_format.sh
+      run: ${{ github.action_path }}/.github/00-Scripts/checking_changelog_format.sh
 
     - name: checking_version_release
       shell: bash
       id: checking_version_release
-      run:  ${{ github.action_path }}/.github/00-Scripts/checking_version_release.sh
+      run: ${{ github.action_path }}/.github/00-Scripts/checking_version_release.sh
 
     - name: checking_sequencer_config
       shell: bash
       id: checking_sequencer_config
-      run:  ${{ github.action_path }}/.github/00-Scripts/checking_sequencer_config.sh
+      run: ${{ github.action_path }}/.github/00-Scripts/checking_sequencer_config.sh
+
+    - name: Output status
+      shell: bash
+      if: ${{ steps.checking_changelog_format.outcome == 'failure' }}
+      id: status_id
+      run: |
+        echo 'status<<EOF' >> $GITHUB_OUTPUT
+        echo "$(cat err_${{ github.job }}.log)" >> $GITHUB_OUTPUT
+        echo 'EOF' >> $GITHUB_OUTPUT
