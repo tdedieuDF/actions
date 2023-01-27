@@ -44,8 +44,6 @@ LIST_APP_TO_IGNORED=(airbus-mands-fw-ed247_adapter-0.7.1
     python3-icecream
     python3-protobuf
     python3-six
-    dragonfly-dcpsinfo-rpm
-    dragonfly-dcpsinfo-deb
     python3-setuptools)
 
 echo "### ${SCRIPT_NAME}" >>"${ERR_FILE_NAME}"
